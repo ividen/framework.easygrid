@@ -4,7 +4,7 @@
 
     <groupId>ru.kwanza.easygrid</groupId>
     <artifactId>easygrid</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <packaging>jar</packaging>
 
     <name>easygrid</name>
@@ -20,6 +20,12 @@
         <javolution.version>5.5.1</javolution.version>
         <guava.version>r05</guava.version>
     </properties>
+
+     <organization>
+        <name>Kwanza</name>
+        <url>http://www.kwanza-systems.ru/</url>
+    </organization>
+    <inceptionYear>2015</inceptionYear>
 
     <build>
         <plugins>
@@ -50,6 +56,33 @@
                             <goal>jar</goal>
                         </goals>
                     </execution>
+                </executions>
+            </plugin>
+             <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <version>1.8</version>
+                <configuration>
+                    <licenseName>apache_v2</licenseName>
+                    <failOnMissingHeader>true</failOnMissingHeader>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>license-before-deploy</id>
+                        <goals>
+				<!-- <goal>update-file-header</goal> -->
+                            <goal>check-file-header</goal>
+                        </goals>
+			<phase>deploy</phase>
+                    </execution>
+                    <execution>
+                        <id>license-before-package</id>
+                        <goals>
+                            <goal>update-project-license</goal>
+                        </goals>
+                        <phase>process-sources</phase>
+                    </execution>
+
                 </executions>
             </plugin>
         </plugins>
@@ -210,10 +243,16 @@
     </dependencies>
 
     <distributionManagement>
+         <repository>
+           <id>kwanza-releases</id>
+           <name>libs-release</name>
+           <url>http://artifactory.kwanza-systems.ru/libs-release-public</url>
+        </repository>
+
         <snapshotRepository>
             <id>snapshots</id>
             <name>snapshots</name>
-            <url>http://artifactory.kwanza-systems.ru/libs-snapshot-local</url>
+            <url>http://artifactory.kwanza-systems.ru/libs-snapshot-public</url>
         </snapshotRepository>
     </distributionManagement>
 
