@@ -70,10 +70,9 @@
                     <execution>
                         <id>license-before-deploy</id>
                         <goals>
-				<!-- <goal>update-file-header</goal> -->
                             <goal>check-file-header</goal>
                         </goals>
-			<phase>deploy</phase>
+			<phase>process-sources</phase>
                     </execution>
                     <execution>
                         <id>license-before-package</id>
